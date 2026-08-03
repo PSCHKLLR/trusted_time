@@ -65,8 +65,11 @@ final class NtsSource implements TimeSource {
   Future<TimeSample> getTime() async {
     // Use package:nts for full RFC 8915 compliant NTS query
     final spec = nts.NtsServerSpec(host: _host, port: _port);
+    // ignore: deprecated_member_use
     final result = _client != null
+        // ignore: deprecated_member_use
         ? await _client.query(spec: spec, timeoutMs: _timeoutMs)
+        // ignore: deprecated_member_use
         : await nts.ntsQuery(spec: spec, timeoutMs: _timeoutMs);
 
     // Report stratum to quality tracker if a listener is registered.
