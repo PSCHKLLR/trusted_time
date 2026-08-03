@@ -31,13 +31,23 @@ final class NtsSource implements TimeSource {
   NtsSource(
     this._host, {
     int port = 4460,
+    nts.TrustMode trustMode = nts.TrustMode.platformWithFallback,
+    List<int>? customRoots,
+    int timeoutMs = 5000,
     void Function(int)? onStratumObserved,
-  }) : _port = port,
-       _onStratumObserved = onStratumObserved;
+  })  : _port = port,
+        _timeoutMs = timeoutMs,
+        _onStratumObserved = onStratumObserved,
+        _client = (trustMode != nts.TrustMode.platformWithFallback ||
+                customRoots != null)
+            ? nts.NtsClient(trustMode: trustMode, customRoots: customRoots)
+            : null;
 
   final String _host;
   final int _port;
+  final int _timeoutMs;
   final void Function(int)? _onStratumObserved;
+  final nts.NtsClient? _client;
 
   @override
   String get id => '${TimeSource.prefixNts}$_host';
@@ -53,10 +63,10 @@ final class NtsSource implements TimeSource {
   @override
   Future<TimeSample> getTime() async {
     // Use package:nts for full RFC 8915 compliant NTS query
-    final result = await nts.ntsQuery(
-      spec: nts.NtsServerSpec(host: _host, port: _port),
-      timeoutMs: 5000,
-    );
+    final spec = nts.NtsServerSpec(host: _host, port: _port);
+    final result = _client != null
+        ? await _client.query(spec: spec, timeoutMs: _timeoutMs)
+        : await nts.ntsQuery(spec: spec, timeoutMs: _timeoutMs);
 
     // Report stratum to quality tracker if a listener is registered.
     _onStratumObserved?.call(result.serverStratum);

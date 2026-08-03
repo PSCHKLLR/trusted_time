@@ -39,6 +39,7 @@ import 'src/trusted_time_mock.dart';
 import 'src/infra/sync_observer.dart';
 import 'src/sources/nts_auth_level.dart';
 
+export 'package:nts/nts.dart' show TrustMode, TrustBackend;
 export 'src/exceptions.dart';
 export 'src/integrity_event.dart';
 export 'src/models.dart'

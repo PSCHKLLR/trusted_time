@@ -55,6 +55,9 @@ final class SyncEngine {
       NtsSource(
         host,
         port: _config.ntsPort,
+        trustMode: _config.ntsTrustMode,
+        customRoots: _config.ntsCustomRoots,
+        timeoutMs: _config.ntsTimeoutMs,
         onStratumObserved: (s) =>
             _qualityTracker.setStratum('${TimeSource.prefixNts}$host', s),
       ),

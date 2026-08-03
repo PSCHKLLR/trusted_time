@@ -7,6 +7,9 @@ final class NtsSource implements TimeSource {
   NtsSource(
     this._host, {
     int port = 4460,
+    Object? trustMode,
+    List<int>? customRoots,
+    int timeoutMs = 5000,
     void Function(int)? onStratumObserved,
   });
 

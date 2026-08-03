@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.2.0]
+
+### Dependencies & Critical Fixes
+
+- **`nts` `^5.0.0` → `^5.1.0`**: Resolves issue #18 by updating to `nts` 5.1.0 which fixes a critical Android JNI bootstrap runtime crash on modern Android (Android 16 / API 36).
+- Validated native JNI initialization, AOT execution, and live TLS 1.3 NTS-KE handshakes.
+
+### Added
+
+- **NTS TrustMode & Custom Roots Support**:
+  - `TrustedTimeConfig` now exposes `ntsTrustMode` (`platformWithFallback`, `platformOnly`, `bundledOnly`, `custom`), `ntsCustomRoots` (PEM/DER bytes), and `ntsTimeoutMs`.
+  - Exported `TrustMode` and `TrustBackend` directly from `trusted_time.dart`.
+  - Enables enterprise/private CA root pinning and strict trust-anchor policy enforcement.
+
 ## [2.1.0]
 
 ### Breaking Changes

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:nts/nts.dart' show TrustMode;
 import 'domain/time_source.dart';
 import 'exceptions.dart';
 import 'sources/nts_auth_level.dart';
@@ -43,6 +44,9 @@ final class TrustedTimeConfig {
     ],
     this.ntsServers = const ['time.cloudflare.com'],
     this.ntsPort = 4460,
+    this.ntsTrustMode = TrustMode.platformWithFallback,
+    this.ntsCustomRoots,
+    this.ntsTimeoutMs = 5000,
     this.additionalSources = const [],
     this.minQuorumRatio = 0.6,
     this.minimumQuorum = 2,
@@ -95,6 +99,17 @@ final class TrustedTimeConfig {
   /// The TCP port used for the NTS Key Exchange (NTS-KE) handshake.
   /// Defaults to 4460 as per RFC 8915.
   final int ntsPort;
+
+  /// The trust-anchor policy applied to NTS handshakes (RFC 8915).
+  /// Options: platformWithFallback, platformOnly, bundledOnly, custom.
+  final TrustMode ntsTrustMode;
+
+  /// Custom PEM or DER root CA certificate bytes when [ntsTrustMode] is [TrustMode.custom].
+  final List<int>? ntsCustomRoots;
+
+  /// The per-query timeout in milliseconds for NTS handshakes.
+  /// Defaults to 5000ms.
+  final int ntsTimeoutMs;
 
   /// Custom [TimeSource] implementations provided by the application developer.
   final List<TimeSource> additionalSources;

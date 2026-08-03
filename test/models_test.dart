@@ -46,4 +46,30 @@ void main() {
       expect(anchor.confidence, ConfidenceLevel.none);
     });
   });
+
+  group('TrustedTimeConfig NTS Trust Mode & Options', () {
+    test('defaults to platformWithFallback, null customRoots, and 5000ms timeout', () {
+      const config = TrustedTimeConfig();
+      expect(config.ntsTrustMode, TrustMode.platformWithFallback);
+      expect(config.ntsCustomRoots, isNull);
+      expect(config.ntsTimeoutMs, 5000);
+    });
+
+    test('supports custom trustMode, customRoots, and ntsTimeoutMs', () {
+      final customCert = [1, 2, 3, 4, 5];
+      final config = TrustedTimeConfig(
+        ntsTrustMode: TrustMode.custom,
+        ntsCustomRoots: customCert,
+        ntsTimeoutMs: 3000,
+      );
+      expect(config.ntsTrustMode, TrustMode.custom);
+      expect(config.ntsCustomRoots, customCert);
+      expect(config.ntsTimeoutMs, 3000);
+    });
+
+    test('supports bundledOnly trustMode', () {
+      const config = TrustedTimeConfig(ntsTrustMode: TrustMode.bundledOnly);
+      expect(config.ntsTrustMode, TrustMode.bundledOnly);
+    });
+  });
 }
