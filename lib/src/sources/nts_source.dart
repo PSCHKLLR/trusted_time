@@ -35,13 +35,14 @@ final class NtsSource implements TimeSource {
     List<int>? customRoots,
     int timeoutMs = 5000,
     void Function(int)? onStratumObserved,
-  })  : _port = port,
-        _timeoutMs = timeoutMs,
-        _onStratumObserved = onStratumObserved,
-        _client = (trustMode != nts.TrustMode.platformWithFallback ||
-                customRoots != null)
-            ? nts.NtsClient(trustMode: trustMode, customRoots: customRoots)
-            : null;
+  }) : _port = port,
+       _timeoutMs = timeoutMs,
+       _onStratumObserved = onStratumObserved,
+       _client =
+           (trustMode != nts.TrustMode.platformWithFallback ||
+               customRoots != null)
+           ? nts.NtsClient(trustMode: trustMode, customRoots: customRoots)
+           : null;
 
   final String _host;
   final int _port;

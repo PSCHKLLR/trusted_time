@@ -48,12 +48,15 @@ void main() {
   });
 
   group('TrustedTimeConfig NTS Trust Mode & Options', () {
-    test('defaults to platformWithFallback, null customRoots, and 5000ms timeout', () {
-      const config = TrustedTimeConfig();
-      expect(config.ntsTrustMode, TrustMode.platformWithFallback);
-      expect(config.ntsCustomRoots, isNull);
-      expect(config.ntsTimeoutMs, 5000);
-    });
+    test(
+      'defaults to platformWithFallback, null customRoots, and 5000ms timeout',
+      () {
+        const config = TrustedTimeConfig();
+        expect(config.ntsTrustMode, TrustMode.platformWithFallback);
+        expect(config.ntsCustomRoots, isNull);
+        expect(config.ntsTimeoutMs, 5000);
+      },
+    );
 
     test('supports custom trustMode, customRoots, and ntsTimeoutMs', () {
       final customCert = [1, 2, 3, 4, 5];
