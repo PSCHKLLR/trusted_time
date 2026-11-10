@@ -68,9 +68,8 @@ final class NtsSource implements TimeSource {
     // ignore: deprecated_member_use
     final result = _client != null
         // ignore: deprecated_member_use
-        ? await _client.query(spec: spec, timeoutMs: _timeoutMs)
-        // ignore: deprecated_member_use
-        : await nts.ntsQuery(spec: spec, timeoutMs: _timeoutMs);
+        ? await _client.query(spec: spec)
+        : await nts.ntsQuery(spec: spec);
 
     // Report stratum to quality tracker if a listener is registered.
     _onStratumObserved?.call(result.serverStratum);
