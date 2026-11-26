@@ -16,7 +16,7 @@ A high-integrity time engine that provides reliable timestamps immune to system 
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Sahad2701' => 'https://github.com/Sahad2701' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'trusted_time/Sources/trusted_time/**/*'
   s.dependency 'Flutter'
   s.platform = :ios, '13.0'
 
