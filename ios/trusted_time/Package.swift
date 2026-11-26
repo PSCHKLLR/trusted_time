@@ -5,10 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "trusted_time",
+    platforms: [
+        .iOS("13.0"),
+    ],
     products: [
-    .library(
-        name: "trusted-time",
-        targets: ["trusted_time"]),
+        .library(
+            name: "trusted-time",
+            targets: ["trusted_time"]),
     ],
     dependencies: [],
     targets: [
