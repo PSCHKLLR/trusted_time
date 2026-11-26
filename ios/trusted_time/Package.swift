@@ -6,9 +6,9 @@ import PackageDescription
 let package = Package(
     name: "trusted_time",
     products: [
-        .library(
-            name: "trusted_time",
-            targets: ["trusted_time"]),
+    .library(
+        name: "trusted-time",
+        targets: ["trusted_time"]),
     ],
     dependencies: [],
     targets: [

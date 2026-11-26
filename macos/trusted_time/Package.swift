@@ -7,7 +7,7 @@ let package = Package(
     name: "trusted_time",
     products: [
         .library(
-            name: "trusted_time",
+            name: "trusted-time",
             targets: ["trusted_time"]),
     ],
     dependencies: [],
